@@ -28,10 +28,10 @@ A Java Swing application for managing contacts with MySQL database integration. 
 ## 📦 Database Schema
 ```sql
 CREATE TABLE contacts (
-    id VARCHAR(20) PRIMARY KEY,
-    name VARCHAR(100),
+    id VARCHAR(10) PRIMARY KEY,
+    name VARCHAR(45),
     address VARCHAR(200),
-    phone VARCHAR(15)
+    phone VARCHAR(12)
 );
 ```
 
