@@ -4,6 +4,8 @@
  */
 package contactorganizer;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author DINUSHKA_THARIDU-AS
@@ -15,6 +17,11 @@ public class DeleteContact extends javax.swing.JFrame {
      */
     public DeleteContact() {
         initComponents();
+        txtAddress.setEnabled(false);
+        txtPNo.setEnabled(false);
+        btnDelete.setEnabled(false);
+        btnUpdate.setEnabled(false);
+        
     }
 
     /**
@@ -136,7 +143,43 @@ public class DeleteContact extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
+        Controller c1 = new Controller();
+        String id = txtID.getText();
+        String name = txtName.getText();
+ 
+        if (id.trim().isEmpty() && name.trim().isEmpty() ){
+             JOptionPane.showMessageDialog(null, "Please Search through ID or Name", "Error", JOptionPane.ERROR_MESSAGE);
+        }else if (!(id.trim().isEmpty())){
+            Controller obj = c1.searchContact(id);
+            if (obj!=null){
+                txtName.setText(obj.getName());
+                txtAddress.setText(obj.getAddress());
+                txtPNo.setText(obj.getpNumber());
+                
+                txtAddress.setEnabled(true);
+                txtPNo.setEnabled(true);
+                btnDelete.setEnabled(true);
+                btnUpdate.setEnabled(true);
+                
+            }
+        }else if(!(name.trim().isEmpty())){
+            Controller obj = c1.searchContact(name);
+            if (obj!=null){
+                
+                txtID.setText(obj.getId());
+                txtAddress.setText(obj.getAddress());
+                txtPNo.setText(obj.getpNumber());
+                
+                txtAddress.setEnabled(true);
+                txtPNo.setEnabled(true);
+                btnDelete.setEnabled(true);
+                btnUpdate.setEnabled(true);
+                
+            }
+        }
+        
+        
+        
     }//GEN-LAST:event_btnSearchActionPerformed
 
     /**

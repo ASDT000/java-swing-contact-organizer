@@ -15,10 +15,10 @@ import javax.swing.JOptionPane;
  * @author DINUSHKA_THARIDU-AS
  */
 public class Controller {
-    String id;
-    String name;
-    String address;
-    String pNumber;
+    private String id;
+    private String name;
+    private String address;
+    private String pNumber;
     int confurm = -1 ;
     
     public int addContact(String id, String name, String address, String pNumber){
@@ -37,10 +37,10 @@ public class Controller {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/contactOrganizer", "root", "Edu@1076");
             PreparedStatement stm = connection.prepareStatement(SQL);
-            stm.setObject(1, id);
-            stm.setObject(2, name);
-            stm.setObject(3, address);
-            stm.setObject(4, pNumber);
+            stm.setObject(1, getId());
+            stm.setObject(2, getName());
+            stm.setObject(3, getAddress());
+            stm.setObject(4, getpNumber());
             int res = stm.executeUpdate();
             
             
@@ -60,32 +60,39 @@ public class Controller {
         return -1;
     }
     
-    public int searchContact(String id, String name){
-        try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/contactorganizer", "root", "");
-            String sql = "SELECT * FROM contacts WHERE id = ? OR name = ?"; 
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, id);
-            pst.setString(2, name); 
-            ResultSet rs = pst.executeQuery();
-
-            if (rs.next()) {
-                txtName.setText(rs.getString("name")); 
-                txtAddress.setText(rs.getString("address"));
-                txtPNo.setText(rs.getString("phoneNo"));
-            } else {
-                JOptionPane.showMessageDialog(this, "Contact not found");
-                txtName.setText("");
-                txtAddress.setText("");
-                txtPNo.setText("");
-            }
-            con.close();
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Database Error: " + ex.getMessage());
-            ex.printStackTrace();
-        }
+    public static Controller searchContact(String index){
+        return null;
+        
     }
+
+    /**
+     * @return the id
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * @return the pNumber
+     */
+    public String getpNumber() {
+        return pNumber;
+    }
+        
 
    
 }
